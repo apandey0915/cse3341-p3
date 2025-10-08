@@ -88,32 +88,33 @@ class Assign implements Stmt {
 		System.out.println(";");
 	}
 
-	public void execute() {
-		switch (type) {
-			case 0: {
-				int v = expr.execute();
-				try {
+	@Override
+    public void execute() {
+        switch (type) {
+            case 0: {
+                int v = expr.execute();
+                try { 
 					Memory.setInt(assignTo.identifier, v);
 				} catch (RuntimeException e) {
-					Memory.setObjDefault(assignTo.identifier, v);
+					Memory.setObjDefault(assignTo.identifier, v); 
 				}
-				break;
-			}
-			case 1: {
-				int v = expr.execute();
-				Memory.setObjKey(assignTo.identifier, key, v);
-				break;
-			}
-			case 2: {
-				int v = init.execute();
-				Memory.newObject(assignTo.identifier, key, v);
-				break;
-			}
-			case 3: {
-				Map<String,Integer> ref = Memory.getObjRef(assignFrom.identifier);
-				Memory.setObjRef(assignTo.identifier, ref);
-				break;
-			}
-		}
-	}
+                break;
+            }
+            case 1: {
+                int v = expr.execute();
+                Memory.setObjKey(assignTo.identifier, key, v);
+                break;
+            }
+            case 2: { 
+                int v = init.execute();
+                Memory.newObject(assignTo.identifier, key, v);
+                break;
+            }
+            case 3: {
+                Map<String,Integer> ref = Memory.getObjRef(assignFrom.identifier);
+                Memory.setObjRef(assignTo.identifier, ref);
+                break;
+            }
+        }
+    }
 }
