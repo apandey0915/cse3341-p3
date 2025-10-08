@@ -1,3 +1,5 @@
+import java.util.Map;
+
 class Assign implements Stmt {
 	// type is
 	// 0 if id := <expr> assignment

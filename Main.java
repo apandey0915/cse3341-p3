@@ -9,7 +9,6 @@ class Main {
 
 		Procedure p = new Procedure();
 		p.parse();
-
 		p.execute();
 	}
 }

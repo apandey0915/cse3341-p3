@@ -27,4 +27,14 @@ class Decl implements Stmt {
 			declObj.execute(global);
 		}
 	}
+
+	@Override
+	public void execute() {
+		// When a <decl> appears as a <stmt>, it should allocate in the current scope (local)
+		if (declInt != null) {
+			declInt.execute(false);
+		} else {
+			declObj.execute(false);
+		}
+	}
 }
