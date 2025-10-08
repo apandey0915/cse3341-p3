@@ -20,6 +20,6 @@ class DeclInteger {
 	}
 
 	public void execute(boolean global) {
-		Memory.declInt(id.identifier, global); // default 0
+		Memory.declInt(id.identifier, global);
 	}
 }

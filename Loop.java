@@ -65,7 +65,12 @@ class Loop implements Stmt {
 		}
 
 		while (cond.execute()) {
-			ss.execute();
+			Memory.enterScope();
+			try {
+				ss.execute();
+			} finally {
+				Memory.exitScope();
+			}
 			int u = update.execute();
 			try { 
 				Memory.setInt(id.identifier, u);

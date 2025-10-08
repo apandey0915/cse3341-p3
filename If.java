@@ -45,9 +45,19 @@ class If implements Stmt {
 
 	public void execute() {
 		if (cond.execute()) {
-			ss1.execute();
+			Memory.enterScope();
+			try {
+				ss1.execute();
+			} finally {
+				Memory.exitScope();
+			}
 		} else if (ss2 != null) {
-			ss2.execute();
+			Memory.enterScope();
+			try {
+				ss2.execute();
+			} finally {
+				Memory.exitScope();
+			}
 		}
 	}
 }

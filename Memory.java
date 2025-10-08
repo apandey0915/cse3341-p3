@@ -19,12 +19,12 @@ final class Memory {
     private static final Map<String,Cell> globals = new HashMap<>();
     private static final Deque<Map<String,Cell>> locals = new ArrayDeque<>();
 
-
     private static final Map<Map<String,Integer>, String> DEFAULT_KEY = new IdentityHashMap<>();
 
     static void enterScope() { 
         locals.push(new HashMap<>()); 
     }
+
     static void exitScope() { 
         locals.pop(); 
     }
@@ -32,17 +32,24 @@ final class Memory {
     static void declInt(String id, boolean global) {
         getScope(global).put(id, new Cell(Kind.INT, id));
     }
+
     static void declObj(String id, boolean global) {
         getScope(global).put(id, new Cell(Kind.OBJ, id));
     }
 
     private static Map<String,Cell> getScope(boolean global) {
-        if (global || locals.isEmpty()) return globals;
+        if (global || locals.isEmpty()) {
+            return globals;
+        }
         return locals.peek();
     }
 
     private static Cell lookup(String id) {
-        for (Map<String,Cell> s : locals) if (s.containsKey(id)) return s.get(id);
+        for (Map<String,Cell> s : locals) {
+            if (s.containsKey(id)) {
+                return s.get(id);
+            }
+        }
         Cell c = globals.get(id);
         if (c == null) {
             throw new RuntimeException("Runtime error: undeclared identifier " + id);
@@ -81,16 +88,13 @@ final class Memory {
         c.obj = ref;
     }
 
-    // Create new object: default key must correspond to the *creating id*.
     static void newObject(String id, String providedKey, int initVal) {
         Cell c = lookup(id);
         if (c.kind != Kind.OBJ) {
             throw new RuntimeException("Type error: " + id + " is not object");
         }
         Map<String,Integer> m = new HashMap<>();
-        // Required by spec: default key corresponds to the id, with initial value <expr>
         m.put(id, initVal);
-        // Optionally seed the provided key with same init value (harmless for tests)
         if (providedKey != null) m.put(providedKey, initVal);
 
         c.obj = m;

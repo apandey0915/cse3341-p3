@@ -92,22 +92,19 @@ class Assign implements Stmt {
     public void execute() {
         switch (type) {
             case 0: {
-                int v = expr.execute();
                 try { 
-					Memory.setInt(assignTo.identifier, v);
+					Memory.setInt(assignTo.identifier, expr.execute());
 				} catch (RuntimeException e) {
-					Memory.setObjDefault(assignTo.identifier, v); 
+					Memory.setObjDefault(assignTo.identifier, expr.execute()); 
 				}
                 break;
             }
             case 1: {
-                int v = expr.execute();
-                Memory.setObjKey(assignTo.identifier, key, v);
+                Memory.setObjKey(assignTo.identifier, key, expr.execute());
                 break;
             }
-            case 2: { 
-                int v = init.execute();
-                Memory.newObject(assignTo.identifier, key, v);
+            case 2: {
+                Memory.newObject(assignTo.identifier, key, init.execute());
                 break;
             }
             case 3: {

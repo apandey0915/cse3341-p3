@@ -24,11 +24,10 @@ class Read implements Stmt {
 	}
 
 	public void execute() {
-		int v = DataInput.readInt();
 		try {
-			Memory.setInt(argument.identifier, v);
+			Memory.setInt(argument.identifier, DataInput.readInt());
 		} catch (RuntimeException e) {
-			Memory.setObjDefault(argument.identifier, v);
+			Memory.setObjDefault(argument.identifier, DataInput.readInt());
 		}
 	}
 }
