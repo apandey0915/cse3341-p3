@@ -31,4 +31,10 @@ class Cmpr {
 		}
 		expr2.print();
 	}
+
+	boolean execute() {
+		int a = expr1.execute();
+		int b = expr2.execute();
+		return (option == 0) ? (a == b) : (a < b);
+	}
 }

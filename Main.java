@@ -1,13 +1,15 @@
 class Main {
 	public static void main(String[] args) {
-		// Initialize the scanner with the input file
-		CoreScanner S = new CoreScanner(args[0]);
-		Parser.scanner = S;
-		
+		if (args.length < 2) {
+			System.out.println("Usage: java Main <program.code> <data.data>");
+			return;
+		}
+		Parser.scanner = new CoreScanner(args[0]);
+		DataInput.init(args[1]);
+
 		Procedure p = new Procedure();
-		
 		p.parse();
-						
-		p.print();
+
+		p.execute();
 	}
 }

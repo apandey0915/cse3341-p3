@@ -55,4 +55,23 @@ class Loop implements Stmt {
 		}
 		System.out.println("end");
 	}
+
+	public void execute() {
+		int initVal = initial.execute();
+		try { 
+			Memory.setInt(id.identifier, initVal);
+		} catch (RuntimeException e) {
+			Memory.setObjDefault(id.identifier, initVal);
+		}
+
+		while (cond.execute()) {
+			ss.execute();
+			int u = update.execute();
+			try { 
+				Memory.setInt(id.identifier, u);
+			} catch (RuntimeException e) {
+				Memory.setObjDefault(id.identifier, u);
+			}
+		}
+	}
 }

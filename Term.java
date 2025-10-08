@@ -28,4 +28,18 @@ class Term {
 			term.print();
 		}
 	}
+
+	int execute() {
+		if (option == 0) {
+			return factor.execute();
+		} else if (option == 1) {
+			return factor.execute() * term.execute();
+		} else {
+			int divisor = term.execute();
+			if (divisor == 0) {
+				throw new RuntimeException("Division by zero");
+			}
+			return factor.execute() / divisor;
+		}
+	}
 }

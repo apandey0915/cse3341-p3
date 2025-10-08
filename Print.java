@@ -22,4 +22,8 @@ class Print implements Stmt {
 		expr.print();
 		System.out.println(");");
 	}
+
+	public void execute() {
+		System.out.println(expr.execute());
+	}
 }

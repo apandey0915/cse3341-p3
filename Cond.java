@@ -51,4 +51,23 @@ class Cond {
 			}
 		}
 	}
+
+	boolean execute() {
+		if (option == 1) {
+			return !cond.execute();
+		}
+		if (option == 2) {
+			return cond.execute(); 
+		}
+		if (cmpr != null && cond == null) {
+			return cmpr.execute();
+		}
+		if (option == 3) {
+			return cmpr.execute() || cond.execute();
+		}
+		if (option == 4) {
+			return cmpr.execute() && cond.execute();
+		}
+		return cmpr.execute();
+	}
 }

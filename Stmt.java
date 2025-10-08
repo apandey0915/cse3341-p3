@@ -2,4 +2,5 @@
 interface Stmt {
 	void parse();
 	void print(int indent);
+	void execute();
 }

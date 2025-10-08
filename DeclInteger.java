@@ -18,4 +18,8 @@ class DeclInteger {
 		id.print();
 		System.out.println(";");
 	}
+
+	public void execute(boolean global) {
+		Memory.declInt(id.identifier, global); // default 0
+	}
 }

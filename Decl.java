@@ -19,4 +19,12 @@ class Decl implements Stmt {
 			declObj.print(indent);
 		}
 	}
+
+	public void execute(boolean global) {
+		if (declInt != null) {
+			declInt.execute(global);
+		} else {
+			declObj.execute(global);
+		}
+	}
 }

@@ -32,4 +32,11 @@ class StmtSeq {
 			ss.print(indent);
 		}
 	}
+
+	void execute() {
+		stmt.execute();
+		if (ss != null) {
+			ss.execute();
+		}
+	}
 }

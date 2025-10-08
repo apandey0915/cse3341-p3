@@ -44,4 +44,22 @@ class Factor {
 			System.out.print(constant);
 		}
 	}
+
+	int execute() {
+		if (id != null) {
+			if (key != null) {
+				return Memory.getObjKey(id.identifier, key);
+			} else {
+				try {
+					return Memory.getInt(id.identifier);
+				} catch (RuntimeException e) {
+					return Memory.getObjDefault(id.identifier);
+				}
+			}
+		} else if (expr != null) {
+			return expr.execute();
+		} else {
+			return constant;
+		}
+	}
 }

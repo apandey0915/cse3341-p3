@@ -18,4 +18,8 @@ class DeclObj {
 		id.print();
 		System.out.println(";");
 	}
+
+	public void execute(boolean global) {
+		Memory.declObj(id.identifier, global);
+	}
 }

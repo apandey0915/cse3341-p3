@@ -17,4 +17,11 @@ class DeclSeq {
 			ds.print(indent);
 		}
 	}
+
+	void execute(boolean global) {
+		decl.execute(global);
+		if (ds != null) {
+			ds.execute(global);
+		}
+	}
 }

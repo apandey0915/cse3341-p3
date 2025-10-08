@@ -22,4 +22,13 @@ class Read implements Stmt {
 		argument.print();
 		System.out.println(");");
 	}
+
+	public void execute() {
+		int v = DataInput.readInt();
+		try {
+			Memory.setInt(argument.identifier, v);
+		} catch (RuntimeException e) {
+			Memory.setObjDefault(argument.identifier, v);
+		}
+	}
 }
